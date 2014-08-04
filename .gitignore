@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -34,3 +35,7 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+# Commenting this out is preferred by some people, see
+# https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
+node_modules

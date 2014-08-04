@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+
+        
+    </head>
+    <body>
+
+
+
+
+    
+        <div id="testSimplexForm"></div>
+        
+        <div id="testSimplex"></div>
+        
+        <button id="testSimplexButton" type="button"></button>
+
+        <script src="vendor/jquery-1.11.1.min.js"></script>
+        
+        <script src="vendor/cjs.min.js"></script>
+
+        <script src="vendor/jsep.min.js"></script>
+        
+        <script type="cjs/template" id='SimplexForm'>
+
+            <h2> Simplex Solver </h2>
+            <h3> Maximize Objective: </h3>
+            <!-- Objective Function Inputs -->
+            <input type='text' cjs-out='objFunc' placeholder='x + y'/> = 
+            <!-- todo: Should validate that this is a single word -->
+            <input type='text' cjs-out='objVar' placeholder='Profit'/> <br>
+            <!-- Objective Function Validation --> 
+            {{#if objFuncMessage}}
+                {{objFuncMessage}} <br>
+            {{#else}}
+                <i>Input Valid</i> <br>
+            {{/if}}
+
+            {{#each constraint}}
+                {{#each this}}
+                    {{#if @key === 'expr'}}
+                        {{this}}
+                    {{/if}}
+                    {{#if @key === 'op'}}
+                        {{#if this === 'lte'}}
+                            ≤
+                        {{/if}}
+                        {{#if this === 'gte'}}
+                            ≥
+                        {{/if}}
+                    {{/if}}
+                    {{#if @key === 'res'}}
+                        {{this}}
+                    {{/if}}
+                {{/each}}
+                <br>
+            {{/each}}
+            <!-- new constraint input -->
+            <input type='text' cjs-out='newConstraintFunc' placeholder='x + y'/>
+            <select id='newConstraintOp'>
+                <option value='lte'>≤</option>
+                <option value='gte'>≥</option>
+            </select>
+            <input type='text' cjs-out='newConstraintVal' placeholder='0'/>
+            <button type='button' id='new-constraint-add'>Add Equation</button> <br>
+            <!-- new constraint Validation -->
+            {{#if newConstraintFuncMessage}}
+                {{newConstraintFuncMessage}} <br>
+            {{#else}}
+                <i>Input Valid</i> <br>
+            {{/if}}
+            
+
+                
+            <h3> Output Matrix: </h3>
+            <pre>
+            {{order}} <br>
+            {{#each matrix}}
+                {{this}} <br>
+            {{/each}}
+            </pre>
+        </script>
+        
+        <script src="app.min.js"></script>
+        
+        <script>
+            new Simplex('testSimplex'); 
+        </script>
+
+    </body>
+</html>
